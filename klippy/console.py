@@ -259,6 +259,8 @@ def main():
     opts = optparse.OptionParser(usage)
     opts.add_option("-v", action="store_true", dest="verbose",
                     help="enable debug messages")
+    opts.add_option("-q", action="store_true", dest="quiet",
+                    help="less messages")
     opts.add_option("-b", "--baud", type="int", dest="baud", help="baud rate")
     opts.add_option("-c", "--canbus_iface", dest="canbus_iface",
                     help="Use CAN bus interface; serialdevice is the chip UUID")
@@ -277,6 +279,8 @@ def main():
     debuglevel = logging.INFO
     if options.verbose:
         debuglevel = logging.DEBUG
+    if options.quiet:
+        debuglevel = logging.WARNING
     logging.basicConfig(level=debuglevel)
 
     r = reactor.Reactor()
